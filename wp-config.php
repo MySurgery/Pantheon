@@ -65,6 +65,36 @@ if ( file_exists( __DIR__ . '/wp-content/private/config.php' ) ) {
     require_once  __DIR__ . '/wp-content/private/config.php';
 }
 
+// Define WP Environments
+define( 'WP_ENVIRONMENT_TYPES', [ 'production', 'preview', 'uat', 'staging', 'development', 'testing', 'local' ] );
+
+// Define WP Environment
+if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && false === getenv( 'WP_ENVIRONMENT_TYPE' ) ) {
+	switch ( $_ENV['PANTHEON_ENVIRONMENT'] ) {
+		case 'live':        // Production environment. Uses main branch
+			putenv( 'WP_ENVIRONMENT_TYPE=production' );
+			break;
+		case 'test':        // Preview environment. Uses main branch
+			putenv( 'WP_ENVIRONMENT_TYPE=preview' );
+			break;
+		case 'uat':         // UAT environment
+			putenv( 'WP_ENVIRONMENT_TYPE=uat' );
+			break;
+		case 'staging':     // Staging environment
+			putenv( 'WP_ENVIRONMENT_TYPE=staging' );
+			break;
+		case 'development': // Development environment
+			putenv( 'WP_ENVIRONMENT_TYPE=development' );
+			break;
+		case 'testing':     // Testing environment
+			putenv( 'WP_ENVIRONMENT_TYPE=testing' );
+			break;
+		default:            // Default to testing environment
+			putenv( 'WP_ENVIRONMENT_TYPE=testing' );
+			break;
+	}
+}
+
 // Temp directory
 define( 'WP_TEMP_DIR', $_SERVER['HOME'] . '/tmp' );
 
