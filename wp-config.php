@@ -62,7 +62,8 @@ define( 'WP_CACHE', file_exists( __DIR__ . '/web/wp-content/advanced-cache.php' 
 
 // Include project specific constants
 if ( file_exists( __DIR__ . '/web/wp-content/private/config.php' ) ) {
-    require_once  __DIR__ . '/web/wp-content/private/config.php';
+	define( 'LOAD_PRIVATE_CONFIG', true );
+	require_once  __DIR__ . '/web/wp-content/private/config.php';
 }
 
 // Define WP Environment
