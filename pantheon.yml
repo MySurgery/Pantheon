@@ -10,13 +10,16 @@ php_version: 7.4
 # See https://pantheon.io/docs/pantheon-yml/#nested-docroot
 web_docroot: true
 
-# HSTS is not set by Pantheon
+# HSTS is set by Pantheon with a short duration (max-age=300)
 # See https://pantheon.io/docs/pantheon-yml/#enforce-https--hsts
-enforce_https: off
+enforce_https: transitional+subdomains
 
 # Set protected web paths
 # See https://pantheon.io/docs/pantheon-yml/#protected-web-paths
 protected_web_paths:
-  - /web/wp-config.php
   - /web/wp-content/private
-  - /web/pantheon.yml
+  - /web/license.txt
+  - /web/readme.html
+  - /web/wp-config.php
+  - /web/wp-config-sample.php
+  - /web/xmlrpc.php
