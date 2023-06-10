@@ -58,7 +58,7 @@ define( 'DISALLOW_FILE_EDIT', true );
 define( 'DISALLOW_FILE_MODS', true );
 
 // Caching
-define( 'WP_CACHE', file_exists( __DIR__ . '/web/wp-content/advanced-cache.php' ) ? true : false );
+define( 'WP_CACHE', file_exists( __DIR__ . '/web/wp-content/advanced-cache.php' ) );
 
 // Include project specific constants
 if ( file_exists( __DIR__ . '/web/wp-content/private/config.php' ) ) {
@@ -73,6 +73,12 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && false === getenv( 'WP_ENVIRONMENT
 			putenv( 'WP_ENVIRONMENT_TYPE=production' );
 			break;
 		case 'test': // Preview environment. Uses main branch
+			putenv( 'WP_ENVIRONMENT_TYPE=staging' );
+			break;
+		case 'preprod': // Preview environment. Uses main branch
+			putenv( 'WP_ENVIRONMENT_TYPE=staging' );
+			break;
+		case 'staging': // Preview environment. Uses main branch
 			putenv( 'WP_ENVIRONMENT_TYPE=staging' );
 			break;
 		default:     // Default to development

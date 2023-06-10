@@ -2,9 +2,9 @@
 # For more information see: https://pantheon.io/docs/pantheon-upstream-yml
 api_version: 1
 
-# Use PHP 7.4
+# Use PHP 8.1
 # See https://pantheon.io/docs/pantheon-yml/#php-version
-php_version: 7.4
+php_version: 8.1
 
 # Nested docroot in /web
 # See https://pantheon.io/docs/pantheon-yml/#nested-docroot
