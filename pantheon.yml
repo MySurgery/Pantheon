@@ -1,18 +1,29 @@
 # Put overrides to your pantheon.upstream.yml file here.
-# For more information see: https://pantheon.io/docs/pantheon-upstream-yml
+# For more information see: https://docs.pantheon.io/pantheon-yml
 api_version: 1
 
-# Use PHP 8.1
-# See https://pantheon.io/docs/pantheon-yml/#php-version
-php_version: 8.1
+# No Build Step on Pantheon
+# Github / Gitlab CI deployments will have completed the build process
+# See: https://docs.pantheon.io/pantheon-yml#integrated-composer-build-step
+# Default: false
+build_step: false
 
-# Nested docroot in /web
-# See https://pantheon.io/docs/pantheon-yml/#nested-docroot
-web_docroot: true
+# Use MariaDB 10.6
+# When this is changed, check the upgrade completed successfully with:
+# `echo "SELECT @@version;" | $(terminus connection:info $SITE.$ENV --fields=mysql_command --format=string)`
+# See https://pantheon.io/docs/pantheon-yml#specify-a-version-of-mariadb
+# Default: 10.4
+database:
+  version: 10.6
 
 # HSTS is set by Pantheon with a short duration (max-age=300)
 # See https://pantheon.io/docs/pantheon-yml/#enforce-https--hsts
 enforce_https: transitional+subdomains
+
+# Use PHP 8.1
+# See https://pantheon.io/docs/pantheon-yml/#php-version
+# Default: 7.4
+php_version: 8.1
 
 # Set protected web paths
 # See https://pantheon.io/docs/pantheon-yml/#protected-web-paths
@@ -23,3 +34,15 @@ protected_web_paths:
   - /web/wp-config.php
   - /web/wp-config-sample.php
   - /web/xmlrpc.php
+
+# By default, any 'protected_web_paths' added to the pantheon.yml file
+# are combined with the paths from the pantheon.upstream.yml file. If
+# 'protected_web_paths_override' is set to true, then the upstream paths
+# are disabled.
+# See: https://docs.pantheon.io/pantheon-yml#protected-web-paths-override
+# Default: false
+protected_web_paths_override: false
+
+# Nested docroot in /web
+# See https://docs.pantheon.io/pantheon-yml#nested-docroot
+web_docroot: true
